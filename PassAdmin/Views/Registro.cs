@@ -21,6 +21,11 @@ namespace PassAdmin.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (this.textBox2.Text!=this.textBox3.Text)
+            {
+                MessageBox.Show(this, "Las contraseñas no coinciden", "Error", MessageBoxButtons.OK);
+                return;
+            }
             string username, password;
             username = this.textBox1.Text;
             password = this.textBox2.Text;
