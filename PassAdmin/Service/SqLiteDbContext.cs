@@ -18,14 +18,16 @@ namespace PassAdmin.Service
         public SqLiteDbContext()
         {
             // Get an absolute path to the database file
-            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MyData.db");
+            var databasePath = Path.Combine(Application.StartupPath, "MyData.db");
 
-            db = new SQLiteConnection(databasePath);
             if (!File.Exists(databasePath))
             {
+                System.Data.SQLite.SQLiteConnection.CreateFile(databasePath);
+                db = new SQLiteConnection(databasePath);
                 db.CreateTable<Usuario>();
                 db.CreateTable<Cuenta>();
             }
+            db = new SQLiteConnection(databasePath);
         }
         public Response InsertUsuario(Usuario item)
         {
